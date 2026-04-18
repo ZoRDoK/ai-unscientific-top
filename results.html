@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI Unscientific Top — Model Refactoring Benchmark</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #0a0a0a; color: #e0e0e0; line-height: 1.6; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+  h1 { font-size: 1.8rem; font-weight: 600; margin-bottom: 0.3rem; color: #fff; }
+  h2 { font-size: 1.1rem; font-weight: 400; color: #888; margin-bottom: 2rem; }
+  .leaderboard { background: #111; border-radius: 12px; padding: 1.5rem; margin-bottom: 2rem; }
+  .leaderboard h3 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #666; margin-bottom: 1rem; }
+  .lb-item { display: flex; align-items: center; padding: 0.7rem 0; border-bottom: 1px solid #1a1a1a; }
+  .lb-item:last-child { border-bottom: none; }
+  .lb-rank { width: 2rem; font-size: 1.4rem; font-weight: 700; color: #444; }
+  .lb-rank.top { color: #f59e0b; }
+  .lb-name { flex: 1; font-weight: 500; }
+  .lb-seniority { font-size: 0.8rem; color: #666; background: #1a1a1a; padding: 0.2rem 0.6rem; border-radius: 4px; }
+  table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+  th { text-align: left; padding: 0.7rem 0.5rem; border-bottom: 2px solid #222; color: #888; font-weight: 500; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; }
+  td { padding: 0.65rem 0.5rem; border-bottom: 1px solid #1a1a1a; }
+  tr:hover { background: #0f0f0f; }
+  .num { font-variant-numeric: tabular-nums; text-align: right; }
+  .good { color: #4ade80; }
+  .bad { color: #f87171; }
+  .meow { color: #f59e0b; }
+  a { color: #60a5fa; text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .tag { display: inline-block; font-size: 0.7rem; padding: 0.15rem 0.4rem; border-radius: 3px; margin-left: 0.3rem; }
+  .tag-green { background: #064e3b; color: #4ade80; }
+  .tag-yellow { background: #713f12; color: #fbbf24; }
+  .tag-red { background: #7f1d1d; color: #f87171; }
+  .section { margin-bottom: 2.5rem; }
+  .section-title { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; color: #555; margin-bottom: 0.8rem; }
+  footer { text-align: center; padding: 2rem 0; color: #444; font-size: 0.8rem; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <h1>AI Unscientific Top</h1>
+  <h2>Model Refactoring Benchmark — <code>callback-dispatch-service.ts</code> (1207 lines)</h2>
+
+  <!-- LEADERBOARD -->
+  <div class="leaderboard">
+    <h3>Leaderboard — Round 1 (2026-04-16)</h3>
+    <div class="lb-item">
+      <div class="lb-rank top">1</div>
+      <div class="lb-name">Qwen-3.6-plus</div>
+      <div class="lb-seniority">Senior</div>
+    </div>
+    <div class="lb-item">
+      <div class="lb-rank">2</div>
+      <div class="lb-name">GLM-5.1</div>
+      <div class="lb-seniority">Middle-Upper</div>
+    </div>
+    <div class="lb-item">
+      <div class="lb-rank">3</div>
+      <div class="lb-name">MiniMax-M2.7-highspeed</div>
+      <div class="lb-seniority">Middle</div>
+    </div>
+    <div class="lb-item">
+      <div class="lb-rank">4</div>
+      <div class="lb-name">Kimi-2.5</div>
+      <div class="lb-seniority">Middle-Lower</div>
+    </div>
+    <div class="lb-item">
+      <div class="lb-rank">5</div>
+      <div class="lb-name">MiMo-v2-omni</div>
+      <div class="lb-seniority">Junior</div>
+    </div>
+    <div class="lb-item">
+      <div class="lb-rank">6</div>
+      <div class="lb-name">Gemma-4:31b</div>
+      <div class="lb-seniority">Unknown</div>
+    </div>
+  </div>
+
+  <!-- ROUND 1 TABLE -->
+  <div class="section">
+    <div class="section-title">Round 1 — 2026-04-16</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Model</th>
+          <th>Seniority</th>
+          <th class="num">Lines</th>
+          <th class="num">Insertions</th>
+          <th class="num">Deletions</th>
+          <th class="num">TSC iters</th>
+          <th class="num">Test iters</th>
+          <th class="num">Time</th>
+          <th class="num">Context</th>
+          <th>PR</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1</td>
+          <td>GLM-5.1</td>
+          <td>Middle-Upper</td>
+          <td class="num">1221</td>
+          <td class="num">321</td>
+          <td class="num">307</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><a href="#">PR</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>2</td>
+          <td>Qwen-3.6-plus</td>
+          <td>Senior</td>
+          <td class="num">1265</td>
+          <td class="num">285</td>
+          <td class="num">227</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><a href="#">PR</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>3</td>
+          <td>MiniMax-M2.7-highspeed</td>
+          <td>Middle</td>
+          <td class="num">1275</td>
+          <td class="num">292</td>
+          <td class="num">224</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><a href="#">PR</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>4</td>
+          <td>Kimi-2.5</td>
+          <td>Middle-Lower</td>
+          <td class="num">1306</td>
+          <td class="num">311</td>
+          <td class="num">212</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><a href="#">PR</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>5</td>
+          <td>MiMo-v2-omni</td>
+          <td>Junior</td>
+          <td class="num">975</td>
+          <td class="num">297</td>
+          <td class="num bad">529</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><a href="#">PR</a></td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>6</td>
+          <td>Gemma-4:31b</td>
+          <td>Unknown</td>
+          <td class="num">1246</td>
+          <td class="num good">149</td>
+          <td class="num good">110</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><a href="#">PR</a></td>
+          <td></td>
+        </tr>
+      </tbody>
+    </table>
+    <p style="margin-top:0.8rem;font-size:0.8rem;color:#555;">
+      Original file: 1207 lines.
+      "—" in TSC/Test columns = data not yet collected from sessions.
+      Context column = total tokens used (to be filled from session data).
+    </p>
+  </div>
+
+  <!-- ROUND 2 TABLE -->
+  <div class="section">
+    <div class="section-title">Round 2 — TBD</div>
+    <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Model</th>
+          <th>Seniority</th>
+          <th class="num">Lines</th>
+          <th class="num">Insertions</th>
+          <th class="num">Deletions</th>
+          <th class="num">TSC iters</th>
+          <th class="num">Test iters</th>
+          <th class="num">Time</th>
+          <th class="num">Context</th>
+          <th>PR</th>
+          <th>Notes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>7</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+        <tr><td>8</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+        <tr><td>9</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+        <tr><td>10</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+        <tr><td>11</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+        <tr><td>12</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- METHODOLOGY -->
+  <div class="section">
+    <div class="section-title">Methodology</div>
+    <ul style="padding-left:1.2rem;color:#aaa;font-size:0.85rem;">
+      <li>Each model receives the same 1207-line TypeScript file and identical instructions: refactor as a Senior Developer, preserve all behavior.</li>
+      <li>Models choose their own refactoring strategy — no hints given.</li>
+      <li>Only <code>callback-dispatch-service.ts</code> may be modified.</li>
+      <li>Must pass <code>tsc --noEmit</code> and <code>npm run test:unit</code>.</li>
+      <li>Each model works in an isolated git worktree with its own branch.</li>
+      <li>Metric: lines changed, TSC iterations, test iterations, time, context, code quality (manual review).</li>
+    </ul>
+  </div>
+
+</div>
+
+<footer>
+  AI Unscientific Top — benchmark by <a href="https://github.com/ZoRDoK">ZoRDoK</a> · 2026
+</footer>
+</body>
+</html>
