@@ -8,15 +8,20 @@ Leaderboard for unscientific LLM model benchmarks. Based on one-shot refactoring
 
 ### Round 1 — 2026-04-16
 
-| # | Model | Provider | Seniority | Lines Δ | TSC | Tests | Time | Tokens | Reqs | Cost | Lint |
+| # | Model | Provider | Seniority | Lines Δ | TSC | Tests | Time | Tokens | Reqs | Cost | Quality Gates |
 |---|-------|----------|-----------|---------|-----|-------|------|--------|------|------|------|
 | 1 | **Qwen-3.6-plus** | opencode-go | Senior | 516 | 2 | 1✓ | 7 min | 50K | 28 | $0.17 | 1 warn |
 | 2 | GLM-5.1 | ollama-cloud | Middle-Upper | 628 | 2 | 1✓ | 74 min | 84K | — | — | 1 warn |
 | 3 | MiniMax-M2.7 | minimax | Middle | 259 | 1 | 1✓ | 3m28s | — | — | — | 1 warn |
 | 4 | Kimi-2.5 | opencode-go | Middle-Lower | 512 | 1 | 1✓ | 11 min | 44K | 15 | $0.12 | clean |
-| 5 | MiMo-v2-omni | opencode-go | Junior | 523 | ? | ? | 4 min | 53K | 38 | $0.22 | 1 err, 2 warn |
+| 5 | MiMo-v2-omni | opencode-go | Junior | 523 | ? | ? | 4 min | 53K | 38 | $0.22 | 1 error, 2 warnings |
 | 6 | Gemma-4:31b | ollama-cloud | DNF | — | — | — | — | — | — | — | — |
 | 7 | Elephant | openrouter | Pre-Junior | 0 | — | — | — | — | — | — | no changes |
+| 8 | MiMo-v2-pro | opencode-go | Junior | 211 | 1 | 1✓ | 7 min | — | — | — | 1 error |
+| 9 | Nemotron-3-super | ollama-cloud | Junior | 991 | 3 | 2✓ | 8 min | — | — | — | 1 error |
+| 10 | gpt-5.3-codex | openai | Senior | 279 | 1 | 1✓ | 2m30s | 55K | — | — | — |
+| 11 | gpt-5.4-fast | openai | Upper-Middle | 319 | 3 | 1✓ | 10m13s | — | — | — | 1 error |
+| 9 | Nemotron-3-super | ollama-cloud | Junior | 991 | 3 | 2✓ | 8 min | — | — | — | 1 error |
 
 **Original file:** 1207 lines. Models used 4 OpenCode skills (TypeScript, Architecture, Style, Tests). Prices from opencode-go logs.
 
@@ -74,6 +79,10 @@ models/
   gemma-4-31b/        # Gemma 4:31b via ollama-cloud (DNF)
   minimax-m2.7/        # MiniMax M2.7-highspeed via minimax subscription
   elephant/            # Elephant via openrouter (no changes committed)
+  mimo-v2-pro/          # MiMo v2-pro via opencode-go
+  nemotron-3-super/     # Nemotron-3-super via ollama-cloud
+  gpt-5.3-codex/        # gpt-5.3-codex via openai
+  gpt-5.4-fast/         # gpt-5.4-fast via openai
 index.html            # Live leaderboard (GitHub Pages)
 ```
 

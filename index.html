@@ -53,7 +53,7 @@
     <h3>Leaderboard — Round 1 (2026-04-16)</h3>
     <div class="lb-item">
       <div class="lb-rank top">1</div>
-      <div class="lb-name">Qwen-3.6-plus <span class="tag tag-green">clean lint</span></div>
+      <div class="lb-name">Qwen-3.6-plus <span class="tag tag-green">clean</span></div>
       <div class="lb-provider">opencode-go</div>
       <div class="lb-seniority">Senior</div>
     </div>
@@ -61,38 +61,27 @@
       <div class="lb-rank">2</div>
       <div class="lb-name">GLM-5.1 <span class="tag tag-yellow">1 lint warning</span></div>
       <div class="lb-provider">ollama-cloud</div>
-      <div class="lb-seniority">Middle-Upper</div>
+<div class="lb-seniority">Senior</div>
     </div>
     <div class="lb-item">
-      <div class="lb-rank">3</div>
-      <div class="lb-name">MiniMax-M2.7-highspeed <span class="tag tag-yellow">1 lint warning</span></div>
-      <div class="lb-provider">minimax</div>
-      <div class="lb-seniority">Middle</div>
-    </div>
-    <div class="lb-item">
-      <div class="lb-rank">4</div>
-      <div class="lb-name">Kimi-2.5 <span class="tag tag-green">clean lint</span></div>
-      <div class="lb-provider">opencode-go</div>
-      <div class="lb-seniority">Middle-Lower</div>
-    </div>
-    <div class="lb-item">
-      <div class="lb-rank">5</div>
-      <div class="lb-name">MiMo-v2-omni <span class="tag tag-red">1 error, 2 warnings</span></div>
-      <div class="lb-provider">opencode-go</div>
+      <div class="lb-rank">9</div>
+      <div class="lb-name">Nemotron-3-super <span class="tag tag-red">behavior change</span></div>
+      <div class="lb-provider">ollama-cloud</div>
       <div class="lb-seniority">Junior</div>
     </div>
     <div class="lb-item">
-      <div class="lb-rank">6</div>
-      <div class="lb-name">Gemma-4:31b <span class="tag tag-red">DNF</span></div>
-      <div class="lb-provider">ollama-cloud</div>
-      <div class="lb-seniority" style="color:#555;">DNF</div>
+      <div class="lb-rank">10</div>
+      <div class="lb-name">gpt-5.3-codex</div>
+      <div class="lb-provider">openai</div>
+      <div class="lb-seniority">Senior</div>
     </div>
     <div class="lb-item">
-      <div class="lb-rank">7</div>
-      <div class="lb-name">Elephant <span class="tag tag-red">no changes</span></div>
-      <div class="lb-provider">openrouter</div>
-      <div class="lb-seniority" style="color:#555;">Pre-Junior</div>
+      <div class="lb-rank">11</div>
+      <div class="lb-name">gpt-5.4-fast <span class="tag tag-red">1 error</span></div>
+      <div class="lb-provider">openai</div>
+      <div class="lb-seniority">Upper-Middle</div>
     </div>
+  </div>
   </div>
 
   <!-- ROUND 1 TABLE -->
@@ -110,9 +99,9 @@
           <th class="num">Tests</th>
           <th class="num">Time</th>
           <th class="num">Tokens</th>
-          <th class="num">Reqs</th>
+           <th class="num">Reqs</th>
           <th class="num">Cost</th>
-          <th>Lint</th>
+          <th>Quality Gates</th>
           <th class="notes-cell">Notes</th>
         </tr>
       </thead>
@@ -189,7 +178,7 @@
           <td class="num">53K</td>
           <td class="num">38</td>
           <td class="num">$0.22</td>
-          <td><span class="tag tag-red">1 err, 2 warn</span></td>
+          <td><span class="tag tag-red">1 error, 2 warnings</span></td>
           <td class="notes-cell"><p>Hallucination-tier code: split one class into several in the same file. Static-only inner class. Moved Map into constructor. Made private methods public in a separate class. Private methods that just call same-named public on this. Unused variables.</p></td>
         </tr>
         <tr>
@@ -222,6 +211,66 @@
           <td><span class="tag tag-red">no changes</span></td>
           <td class="notes-cell"><p>Model ignored instructions, responded only in English, spawned sub-agents, and attempted to invoke a "human" sub-agent. Refactoring limited to moving .method() calls around. Zero actual code changes committed.</p></td>
         </tr>
+        <tr>
+          <td>8</td>
+          <td>MiMo-v2-pro</td>
+          <td>opencode-go</td>
+          <td>Junior</td>
+          <td class="num">211</td>
+          <td class="num">1</td>
+          <td class="num">1✓</td>
+          <td class="num">7 min</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><span class="tag tag-red">1 error</span></td>
+          <td class="notes-cell"><p>Very strange refactor: extracted dispatch into Map+handler pattern but made handlers call private wrappers that just call the original public methods. Moved this.service.method calls into private methods for no reason. Not a real improvement. Junior.</p></td>
+        </tr>
+        <tr>
+          <td>9</td>
+          <td>Nemotron-3-super</td>
+          <td>ollama-cloud</td>
+          <td>Junior</td>
+          <td class="num">991</td>
+          <td class="num">3</td>
+          <td class="num">2✓</td>
+          <td class="num">8 min</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><span class="tag tag-red">1 error</span></td>
+          <td class="notes-cell"><p>Changed method behavior: decided to delete DB pendings before each operation (!). Didn't follow style skill rules, arbitrarily rearranged file blocks so git counted as full deletions. Code worse than original, style guide violated. Tests pass but dangerous behavior change (forbidden). Junior.</p></td>
+        </tr>
+        <tr>
+          <td>10</td>
+          <td>gpt-5.3-codex</td>
+          <td>openai</td>
+          <td>Senior</td>
+          <td class="num">279</td>
+          <td class="num">1</td>
+          <td class="num">1✓</td>
+          <td class="num">2m30s</td>
+          <td class="num">55K</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td>—</td>
+          <td class="notes-cell"><p>Moved Map to class field without wrapper method. Changes few but purposeful. Not the peak codex can produce, but solid and fast. Senior level, but below Qwen. Middle-Upper.</p></td>
+        </tr>
+        <tr>
+          <td>11</td>
+          <td>gpt-5.4-fast</td>
+          <td>openai</td>
+          <td>Upper-Middle</td>
+          <td class="num">319</td>
+          <td class="num">3</td>
+          <td class="num">1✓</td>
+          <td class="num">10m13s</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td class="num">—</td>
+          <td><span class="tag tag-red">1 error</span></td>
+          <td class="notes-cell"><p>Didn't fix private→private readonly, moved Map to class field, made switch from branching if..else. Added strange private one-line calls to public methods. Used <code>!</code> assertion to silence tsc. Upper-Middle.</p></td>
+        </tr>
       </tbody>
     </table>
     <p style="margin-top:0.8rem;font-size:0.8rem;color:#555;">
@@ -250,8 +299,8 @@
           <th class="num">Tests</th>
           <th class="num">Time</th>
           <th class="num">Tokens</th>
-          <th class="num">Cost</th>
-          <th>Lint</th>
+           <th class="num">Cost</th>
+          <th>Quality Gates</th>
           <th class="notes-cell">Notes</th>
         </tr>
       </thead>
