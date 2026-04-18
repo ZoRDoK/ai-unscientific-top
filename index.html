@@ -91,13 +91,12 @@
           <th>#</th>
           <th>Model</th>
           <th>Seniority</th>
-          <th class="num">Lines</th>
-          <th class="num">Ins</th>
-          <th class="num">Del</th>
+          <th class="num">Lines Δ</th>
           <th class="num">TSC</th>
           <th class="num">Tests</th>
           <th class="num">Time</th>
           <th class="num">Tokens</th>
+          <th class="num">Reqs</th>
           <th class="num">Cost</th>
           <th>Lint</th>
           <th class="notes-cell">Notes</th>
@@ -108,42 +107,39 @@
           <td>1</td>
           <td><strong>Qwen-3.6-plus</strong></td>
           <td>Senior</td>
-          <td class="num">1275</td>
-          <td class="num">292</td>
-          <td class="num">224</td>
+          <td class="num">516</td>
           <td class="num">2</td>
-          <td class="num">1</td>
+          <td class="num">1✓</td>
           <td class="num">7 min</td>
           <td class="num">50K</td>
+          <td class="num">28</td>
           <td class="num">$0.23</td>
-          <td><span class="tag tag-green">clean</span></td>
+          <td><span class="tag tag-yellow">1 warn</span></td>
           <td class="notes-cell"><p>Decomposed variables, simplified calls. Switch from if-chains. Inverted else for readability. Extracted types to file header. Most readable diff: red bloat left, clean green right.</p></td>
         </tr>
         <tr>
           <td>2</td>
           <td>GLM-5.1</td>
           <td>Middle-Upper</td>
-          <td class="num">1221</td>
-          <td class="num">321</td>
-          <td class="num">307</td>
+          <td class="num">628</td>
           <td class="num">2</td>
-          <td class="num">1</td>
-          <td class="num">74 min</td>
+          <td class="num">1✓</td>
+          <td class="num">74 min <span style="font-size:0.7rem;color:#666">(w/ restarts)</span></td>
           <td class="num">84K</td>
           <td class="num">—</td>
+          <td class="num">—</td>
           <td><span class="tag tag-yellow">1 warn</span></td>
-          <td class="notes-cell"><p>Good finds: if→Map lookups, extracting params objects, logging actual error vs hardcoded string. But also introduced unnecessary service wrappers, bloated delivery chains, changed e→error in catches.</p></td>
+          <td class="notes-cell"><p>Good finds: if→Map lookups, extracting params objects, logging actual error vs hardcoded string. But also introduced unnecessary service wrappers, bloated delivery chains, changed e→error in catches. Slow due to Ollama rate limits.</p></td>
         </tr>
         <tr>
           <td>3</td>
           <td>MiniMax-M2.7</td>
           <td>Middle</td>
-          <td class="num">1246</td>
-          <td class="num">149</td>
-          <td class="num">110</td>
+          <td class="num">259</td>
           <td class="num">1</td>
-          <td class="num">1</td>
-          <td class="num">3.5 min</td>
+          <td class="num">1✓</td>
+          <td class="num">3m28s</td>
+          <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td><span class="tag tag-yellow">1 warn</span></td>
@@ -153,13 +149,12 @@
           <td>4</td>
           <td>Kimi-2.5</td>
           <td>Middle-Lower</td>
-          <td class="num">1265</td>
-          <td class="num">285</td>
-          <td class="num">227</td>
+          <td class="num">512</td>
           <td class="num">1</td>
-          <td class="num">1</td>
+          <td class="num">1✓</td>
           <td class="num">11 min</td>
           <td class="num">44K</td>
+          <td class="num">15</td>
           <td class="num">$0.19</td>
           <td><span class="tag tag-green">clean</span></td>
           <td class="notes-cell"><p>Strange code: empty wrapper methods that just call another method. Built a separate builder for a static Map that others made a class field. Much bloat reminiscent of early OpenClaw output. Chatty agent, poor coder.</p></td>
@@ -168,22 +163,20 @@
           <td>5</td>
           <td>MiMo-v2-omni</td>
           <td>Junior</td>
-          <td class="num">1306</td>
-          <td class="num">311</td>
-          <td class="num">212</td>
+          <td class="num">523</td>
           <td class="num">?</td>
           <td class="num">?</td>
           <td class="num">4 min <span style="font-size:0.7rem;color:#666">(claims 43s)</span></td>
           <td class="num">53K</td>
+          <td class="num">38</td>
           <td class="num">$0.70</td>
           <td><span class="tag tag-red">1 err, 2 warn</span></td>
-          <td class="notes-cell"><p>Hallucination-tier code: split one class into several in the same file. Static-only inner class. Moved Map into constructor. Made private methods public in a separate class. Private methods that just call same-named public on this.</p></td>
+          <td class="notes-cell"><p>Hallucination-tier code: split one class into several in the same file. Static-only inner class. Moved Map into constructor. Made private methods public in a separate class. Private methods that just call same-named public on this. Unused variables.</p></td>
         </tr>
         <tr>
           <td>6</td>
           <td>Gemma-4:31b</td>
           <td class="dns">DNF</td>
-          <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">—</td>
           <td class="num">—</td>
@@ -197,9 +190,11 @@
       </tbody>
     </table>
     <p style="margin-top:0.8rem;font-size:0.8rem;color:#555;">
-      Original file: 1207 lines. All models worked on the same file with the same prompt.
-      Models used oh-my-opencode-slim skills (TypeScript, Architecture, Style, Tests).
-      Prices from opencode-go where applicable; "—" = free/local model.
+      Original file: 1207 lines. <strong>Lines Δ</strong> = insertions + deletions.
+      All models worked on the same file with the same prompt.
+      All models used OpenCode skills (TypeScript, Architecture, Style, Tests).
+      Prices from opencode-go where applicable; "—" = free/local model (subscription or self-hosted).
+      Tests ✓ = passed unit tests; "?" = unknown.
     </p>
   </div>
 
