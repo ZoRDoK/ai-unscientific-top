@@ -6,28 +6,45 @@ Leaderboard for unscientific LLM model benchmarks. Based on one-shot refactoring
 
 **Live leaderboard:** [zordok.github.io/ai-unscientific-top](https://zordok.github.io/ai-unscientific-top/)
 
-### Round 1 — 2026-04-16
+### Senior
+| Model | Provider | Lines Δ | Time | Cost | Quality Gates |
+|-------|----------|---------|------|------|------|
+| **Qwen-3.6-plus** | opencode-go | 516 | 7 min | $0.17 | 1 warn |
+| gpt-5.3-codex | openai | 279 | 2m30s | — | — |
 
-| # | Model | Provider | Seniority | Lines Δ | TSC | Tests | Time | Tokens | Reqs | Cost | Quality Gates |
-|---|-------|----------|-----------|---------|-----|-------|------|--------|------|------|------|
-| 1 | **Qwen-3.6-plus** | opencode-go | Senior | 516 | 2 | 1✓ | 7 min | 50K | 28 | $0.17 | 1 warn |
-| 2 | GLM-5.1 | ollama-cloud | Middle-Upper | 628 | 2 | 1✓ | 74 min | 84K | — | — | 1 warn |
-| 3 | MiniMax-M2.7 | minimax | Middle | 259 | 1 | 1✓ | 3m28s | — | — | — | 1 warn |
-| 4 | Kimi-2.5 | opencode-go | Middle-Lower | 512 | 1 | 1✓ | 11 min | 44K | 15 | $0.12 | clean |
-| 5 | MiMo-v2-omni | opencode-go | Junior | 523 | ? | ? | 4 min | 53K | 38 | $0.22 | 1 error, 2 warnings |
-| 6 | Gemma-4:31b | ollama-cloud | DNF | — | — | — | — | — | — | — | — |
-| 7 | Elephant | openrouter | Pre-Junior | 0 | — | — | — | — | — | — | no changes |
-| 8 | MiMo-v2-pro | opencode-go | Junior | 211 | 1 | 1✓ | 7 min | — | — | — | 1 error |
-| 9 | Nemotron-3-super | ollama-cloud | Junior | 991 | 3 | 2✓ | 8 min | — | — | — | 1 error |
-| 10 | gpt-5.3-codex | openai | Senior | 279 | 1 | 1✓ | 2m30s | 55K | — | — | — |
-| 11 | gpt-5.4-fast | openai | Upper-Middle | 319 | 3 | 1✓ | 10m13s | — | — | — | 1 error |
-| 9 | Nemotron-3-super | ollama-cloud | Junior | 991 | 3 | 2✓ | 8 min | — | — | — | 1 error |
+### Upper-Middle
+| Model | Provider | Lines Δ | Time | Cost | Quality Gates |
+|-------|----------|---------|------|------|------|
+| GLM-5.1 | ollama-cloud | 628 | 74 min | — | 1 warn |
+| gpt-5.4-fast | openai | 319 | 10m13s | — | 1 error |
 
-**Original file:** 1207 lines. Models used 4 OpenCode skills (TypeScript, Architecture, Style, Tests). Prices from opencode-go logs.
+### Middle
+| Model | Provider | Lines Δ | Time | Cost | Quality Gates |
+|-------|----------|---------|------|------|------|
+| MiniMax-M2.7 | minimax | 259 | 3m28s | — | 1 warn |
+| Kimi-2.5 | opencode-go | 512 | 11 min | $0.12 | clean |
+
+### Junior
+| Model | Provider | Lines Δ | Time | Cost | Quality Gates |
+|-------|----------|---------|------|------|------|
+| MiMo-v2-omni | opencode-go | 523 | 4 min | $0.22 | 1 error, 2 warnings |
+| MiMo-v2-pro | opencode-go | 211 | 7 min | — | 1 error |
+| Nemotron-3-super | ollama-cloud | 991 | 8 min | — | 1 error |
+| deepseek-3.2 | ollama-cloud | 106 | ~hours | — | — |
+
+### Did Not Finish
+| Model | Provider | Notes |
+|-------|----------|-------|
+| Gemma-4:31b | ollama-cloud | DNF |
+| Elephant | openrouter | No changes |
+
+**Rounds:**
+- **Round 1** (2026-04-16): Qwen-3.6-plus, GLM-5.1, MiniMax-M2.7, Kimi-2.5, MiMo-v2-omni, Gemma-4:31b
+- **Round 2** (2026-04-18): Elephant, MiMo-v2-pro, Nemotron-3-super, gpt-5.3-codex, gpt-5.4-fast, deepseek-3.2
 
 ## Comparing Model Output
 
-Each model's refactored file is in `models/<model-name>/callback-dispatch-service.ts`, with Russian strings translated to English for readability. The baseline (pre-refactor) is `models/baseline/callback-dispatch-service.ts`.
+Each model's refactored file is in `models/<model-name>/callback-dispatch-service.ts`. The baseline (pre-refactor) is `models/baseline/callback-dispatch-service.ts`.
 
 ### Diff a model against baseline (local)
 
@@ -83,6 +100,7 @@ models/
   nemotron-3-super/     # Nemotron-3-super via ollama-cloud
   gpt-5.3-codex/        # gpt-5.3-codex via openai
   gpt-5.4-fast/         # gpt-5.4-fast via openai
+  deepseek-3.2/         # deepseek-3.2 via ollama-cloud
 index.html            # Live leaderboard (GitHub Pages)
 ```
 
