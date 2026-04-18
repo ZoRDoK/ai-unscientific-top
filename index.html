@@ -113,7 +113,7 @@
           <td class="num">7 min</td>
           <td class="num">50K</td>
           <td class="num">28</td>
-          <td class="num">$0.23</td>
+          <td class="num">$0.17</td>
           <td><span class="tag tag-yellow">1 warn</span></td>
           <td class="notes-cell"><p>Decomposed variables, simplified calls. Switch from if-chains. Inverted else for readability. Extracted types to file header. Most readable diff: red bloat left, clean green right.</p></td>
         </tr>
@@ -155,7 +155,7 @@
           <td class="num">11 min</td>
           <td class="num">44K</td>
           <td class="num">15</td>
-          <td class="num">$0.19</td>
+          <td class="num">$0.12</td>
           <td><span class="tag tag-green">clean</span></td>
           <td class="notes-cell"><p>Strange code: empty wrapper methods that just call another method. Built a separate builder for a static Map that others made a class field. Much bloat reminiscent of early OpenClaw output. Chatty agent, poor coder.</p></td>
         </tr>
@@ -169,7 +169,7 @@
           <td class="num">4 min <span style="font-size:0.7rem;color:#666">(claims 43s)</span></td>
           <td class="num">53K</td>
           <td class="num">38</td>
-          <td class="num">$0.70</td>
+          <td class="num">$0.22</td>
           <td><span class="tag tag-red">1 err, 2 warn</span></td>
           <td class="notes-cell"><p>Hallucination-tier code: split one class into several in the same file. Static-only inner class. Moved Map into constructor. Made private methods public in a separate class. Private methods that just call same-named public on this. Unused variables.</p></td>
         </tr>
