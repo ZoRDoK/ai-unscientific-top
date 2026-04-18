@@ -244,6 +244,21 @@
     </ul>
   </div>
 
+  <!-- FILES -->
+  <div class="section">
+    <div class="section-title">Model Output Files</div>
+    <p style="font-size:0.85rem;color:#aaa;">
+      Each model's refactored file is in <code>models/&lt;model-name&gt;/callback-dispatch-service.ts</code> with Russian strings translated to English.
+      Baseline (pre-refactor) is in <code>models/baseline/</code>.
+      <br><br>
+      <strong>Diff against baseline:</strong> <code>git diff --no-index models/baseline/callback-dispatch-service.ts models/qwen-3.6-plus/callback-dispatch-service.ts</code>
+      <br>
+      <strong>Diff two models:</strong> <code>git diff --no-index models/kimi-2.5/callback-dispatch-service.ts models/qwen-3.6-plus/callback-dispatch-service.ts</code>
+      <br><br>
+      Or view files directly on <a href="https://github.com/ZoRDoK/ai-unscientific-top/tree/main/models">GitHub</a>.
+    </p>
+  </div>
+
 </div>
 
 <footer>
